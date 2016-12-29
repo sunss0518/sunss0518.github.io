@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/github-dark.css" media="screen">
+    <title>PHP 5 Sessions</title>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>Sunss0518.GitHub.io</h1>
+        <h2></h2>
+        <section id="downloads">
+          <a href="https://github.com/sunss0518" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+    <div class="container">
+      <section id="main_content">
+        <h2 id="php-5-sessions">PHP 5 Sessions</h2>
+
+<p>session是一种用于跨多页面存储信息的方式。</p>
+
+<p>它不像cookie，信息没有存储在用户的电脑上。</p>
+
+<h3 id="php-session是什么">PHP Session是什么？</h3>
+
+<p>当你打开一个应用，操作一番，然后关闭它。这大概就是一个Session。电脑知道你是谁。它知道你什么时候打开应用，什么时候关闭。但在互联网上有一个问题：web服务器不知道你是谁，你做了什么，因为HTTP地址不保持状态（maintain state）。</p>
+
+<p>Session变量通过存储跨多页面用户信息解决了这个问题。默认情况下，session变量持续到用户关闭浏览器。</p>
+
+<p>所以，session变量保存一个用户的信息，可以获取到一个应用的所有页面。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>小建议：如果需要一个永久的（permanent）存储器,你可以在一个数据库中存储数据。
+</code></pre>
+</div>
+<h3 id="开始一个php-session">开始一个PHP Session</h3>
+
+<p>用session_start()函数开始一个session。</p>
+
+<p>用PHP的全局变量$_SESSION设置session变量。</p>
+
+<p>现在，让我们创建一个叫“demo_session1.php”的新页面。在页面里，我们开始一个新的PHP session并设置一些session变量：</p>
+
+<h6 id="example">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php
+// Start the session
+session_start();
+?&gt;</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="cp">&lt;?php
+// Set session variables
+$_SESSION["favcolor"] = "green";
+$_SESSION["favanimal"] = "cat";
+echo "Session variables are set.";
+?&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+<div class="highlighter-rouge"><pre class="highlight"><code>注意：session_start()函数必需在文档的最前面。任何HTML标签的前面。
+</code></pre>
+</div>
+<h3 id="获取php-session变量的值">获取PHP Session变量的值</h3>
+
+<p>接下来，我们创建另一个叫“demo_session2.php”。从这个页面，我们可以获取到在第一个页面（demo_session1.php）设置的session信息。</p>
+
+<p>注意，session变量不是单独传递到每个新页面。相反，它们从页面的开始部分（session_start()）恢复session。</p>
+
+<p>同时注意，所有session变量的值都被存储在全局变量$_SESSION上：</p>
+
+<h6 id="example-1">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php
+session_start();
+?&gt;</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="cp">&lt;?php
+// Echo session variable that were set on previous page
+echo "Favorite color is " . $_SESSION["favcolor"] . ".&lt;br&gt;";
+echo "Favorite animal is " . $_SESSION["favanimal"] . ".";
+?&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+<p>另一个显示所有session变量值的方式是：</p>
+
+<h6 id="example-2">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php
+session_start();
+?&gt;</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="cp">&lt;?php
+print_r($_SESSION);
+?&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+<div class="highlighter-rouge"><pre class="highlight"><code>它是怎么工作的？它怎么知道那是我？
+
+大多数session设置一个user-key在用户电脑上，比如：765487cf34ert8dede5a562e4f3a7e12。然后，当一个session在另一个页面被打开时，它扫描电脑上的user-key。如果有匹配，则获取session，否则，开始一个新的session。
+</code></pre>
+</div>
+<h3 id="修改php-session变量的值">修改PHP Session变量的值</h3>
+
+<p>要去改变一个session变量，只需重写它：</p>
+
+<h6 id="example-3">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php
+session_start();
+?&gt;</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="cp">&lt;?php
+// to change a session variable, just overwrite it
+$_SESSION["favcolor"] = "yellow";
+print_r($SESSION);
+?&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+<h3 id="破坏一个php-session">破坏一个PHP Session</h3>
+
+<p>移除所有全局session变量并破坏它，需要用session_unset()和session_destroy()：</p>
+
+<h6 id="example-4">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php
+session_start();
+?&gt;</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="cp">&lt;?php
+// remove all session variables
+session_unset();
+
+// destroy the session
+session_destroy();
+?&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+      </section>
+      <section id="main_comment">
+        <noscript>Please enable JavaScript to view the comment form powered by <a href="https://commentit.io/">Comm(ent|it)</a></noscript>
+        <div id="commentit"></div>
+        <script type="text/javascript">
+          /** CONFIGURATION VARIABLES **/
+          var commentitUsername = 'sunss0518';
+          var commentitRepo = 'sunss0518/sunss0518.github.io';
+          var commentitPath = '_posts/2016-12-11-php_session.md';
+        
+          /** DON'T EDIT FOLLOWING LINES **/
+          (function() {
+              var commentit = document.createElement('script');
+              commentit.type = 'text/javascript';
+              commentit.async = true;
+              commentit.src = 'https://commentit.io/static/embed/dist/commentit.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(commentit);
+          })();
+        </script>
+      </section>
+    </div>
+    <footer>
+      <div class="container">
+        <table>
+          <th><small>孙帅帅的博客</small></th>
+          <td><a href="http://weibo.com/2535244965/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" class="btn" target="_blank">Sina</a></td>
+          <td><a href="http://codepen.io/sunss0518/" class="btn" target="_blank">Codepen</a></td>
+        </table>
+      </div>
+    </footer>      
+  </body>
+</html>

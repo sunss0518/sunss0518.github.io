@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/github-dark.css" media="screen">
+    <title>PHP 5 Include Files</title>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>Sunss0518.GitHub.io</h1>
+        <h2></h2>
+        <section id="downloads">
+          <a href="https://github.com/sunss0518" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+    <div class="container">
+      <section id="main_content">
+        <h2 id="php-5-include-files">PHP 5 Include Files</h2>
+
+<p>include语句把指定文件里面所有存在的文本/代码/标记复制进文件里。</p>
+
+<p>当你想在一个网站的多个页面包含相同的PHP、HTML或者文本时，包含文件是非常有用的。</p>
+
+<h3 id="php的include语句和require语句">PHP的include语句和require语句</h3>
+
+<p>用include语句或者require语句可以在服务器执行之前把一个PHP文件的内容嵌入另一个PHP文件。</p>
+
+<p><strong>include和require语句是相同的，除了在失败结果上不同：</strong></p>
+<ul>
+  <li>require将会产生一个严重的错误（E_COMPILE_ERROR），并且停止脚本的运行</li>
+  <li>include只产生一个警告（E_WARNING），脚本则继续运行</li>
+</ul>
+
+<p>所以，如果你想继续执行去展示用户的输出（即使包含文件丢失了），就使用include语句。否则，在FrameWork、CMS或是一个复杂PHP应用编码的情况下，经常用require语句包含一个关键文件到执行流中。这将帮助避免你的应用的安全性和完整性受到伤害， 防止你的关键文件突然丢失。</p>
+
+<p>包含文件节省了大量的工作。这意味着你可以为网站的所有网页创建一个标准的头部，脚部或者菜单文件。然后，当头部需要更新时，你可以只更新头部包含文件。</p>
+
+<h4 id="语法">语法</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>include 'filename';
+
+or
+
+require 'filename';
+</code></pre>
+</div>
+<h3 id="php-include-examples">PHP include Examples</h3>
+
+<h4 id="example-1">Example 1</h4>
+
+<p>假设我们有一个叫做“footer.php”的标准脚部文件，如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+echo "&lt;p&gt;Copyright &amp;copy; 1999-" . date("Y") . "W3School.com&lt;/p&gt;";
+?&gt;
+</code></pre>
+</div>
+<p>包含一个脚部文件进一个页面，用include语句：</p>
+
+<h6 id="example">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="nt">&lt;h1&gt;</span>Welcome to my home page!<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;p&gt;</span>Some text.<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p&gt;</span>Some more text.<span class="nt">&lt;/p&gt;</span>
+<span class="cp">&lt;?php include 'footer.php';?&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+<h4 id="example-2">Example 2</h4>
+
+<p>假设我们有一个叫“menu.php”的标准菜单文件：</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+echo '&lt;a href="/default.asp"&gt;Home&lt;/a&gt; -
+&lt;a href="/html/default.asp"&gt;HTML Tutorial&lt;/a&gt; -
+&lt;a href="/css/default.asp"&gt;CSS Tutorial&lt;/a&gt; -
+&lt;a href="/js/default.asp"&gt;JavaScript Tutorial&lt;/a&gt; -
+&lt;a href="default.asp"&gt;PHP Tutorial&lt;/a&gt;';
+?&gt;
+</code></pre>
+</div>
+<p>网站的所有页面都应该用这个菜单文件。下面是使用例子（我们为了让菜单容易被修饰，添加一个&lt;div&gt;元素：</p>
+
+<h6 id="example-1">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"menu"</span><span class="nt">&gt;</span>
+<span class="cp">&lt;?php include 'menu.php';?&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;h1&gt;</span>Welcome to my home page!<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;p&gt;</span>Some text.<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p&gt;</span>Some more text.<span class="nt">&lt;/p&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+<h4 id="example-3">Example 3</h4>
+<p>假设我们有一个叫做“vars.php”的文件，定义了一些变量：</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+$color='red';
+$car='BMW';
+?&gt;
+</code></pre>
+</div>
+<p>如果我们包含“vars.php”文件，里面的变量可以被调用文件使用：</p>
+
+<h6 id="example-2">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="nt">&lt;h1&gt;</span>Welcome to my home page!<span class="nt">&lt;/h1&gt;</span>
+<span class="cp">&lt;?php include 'vars.php';
+echo "I have a $color $car.";
+?&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+<h3 id="php-include-vs-require">PHP include vs. require</h3>
+<p>require语句也被用来包含一个文件进PHP代码里。</p>
+
+<p>然而，includehe和require有一个很大的不同点；当用include语句包含一个文件且PHP不能发现它时，脚本继续执行：</p>
+
+<h6 id="example-3">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="nt">&lt;h1&gt;</span>Welcome to my home page!<span class="nt">&lt;/h1&gt;</span>
+<span class="cp">&lt;?php include 'noFileExists.php';
+echo "I have a $color $car.";
+?&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+<p>如果我们用require做相同的例子，echo语句将不会执行，因为require语句返回一个严重错误后脚本执行消失：</p>
+
+<h6 id="example-4">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="nt">&lt;h1&gt;</span>Welcome to my home page!<span class="nt">&lt;/h1&gt;</span>
+<span class="cp">&lt;?php require 'noFileExists.php';
+echo "I have a $color $car.";
+?&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+<p>当文件对于应用是必需的时候，用require语句。</p>
+
+<p>当文件对于应用不是必需的且没被发现仍然执行时，用include语句。</p>
+
+<p><a href="/index.html">Go back</a></p>
+
+
+      </section>
+      <section id="main_comment">
+        <noscript>Please enable JavaScript to view the comment form powered by <a href="https://commentit.io/">Comm(ent|it)</a></noscript>
+        <div id="commentit"></div>
+        <script type="text/javascript">
+          /** CONFIGURATION VARIABLES **/
+          var commentitUsername = 'sunss0518';
+          var commentitRepo = 'sunss0518/sunss0518.github.io';
+          var commentitPath = '_posts/2016-11-26-php_includes.md';
+        
+          /** DON'T EDIT FOLLOWING LINES **/
+          (function() {
+              var commentit = document.createElement('script');
+              commentit.type = 'text/javascript';
+              commentit.async = true;
+              commentit.src = 'https://commentit.io/static/embed/dist/commentit.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(commentit);
+          })();
+        </script>
+      </section>
+    </div>
+    <footer>
+      <div class="container">
+        <table>
+          <th><small>孙帅帅的博客</small></th>
+          <td><a href="http://weibo.com/2535244965/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" class="btn" target="_blank">Sina</a></td>
+          <td><a href="http://codepen.io/sunss0518/" class="btn" target="_blank">Codepen</a></td>
+        </table>
+      </div>
+    </footer>      
+  </body>
+</html>

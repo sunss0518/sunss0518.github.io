@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/github-dark.css" media="screen">
+    <title>ASP.NET Web Pages - 添加Razor代码</title>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>Sunss0518.GitHub.io</h1>
+        <h2></h2>
+        <section id="downloads">
+          <a href="https://github.com/sunss0518" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+    <div class="container">
+      <section id="main_content">
+        <h2 id="aspnet-web-pages---添加razor代码">ASP.NET Web Pages - 添加Razor代码</h2>
+
+<p>ASP.NET Web Pages用Razor标记C#和VB代码</p>
+
+<h3 id="razor标记">Razor标记</h3>
+
+<p>Razor是一种将服务器代码（C#或VB）嵌入ASP.NET web pages中的简单的标记语法。</p>
+
+<h6 id="example">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Web Pages Demo<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>Hello Web Pages<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;p&gt;</span>The time is @DateTime.Now<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+<p>上面的页面包含了寻常的HTML标记和Razor标记。</p>
+
+<h3 id="关于c的razor语法">关于C#的Razor语法</h3>
+
+<ul>
+  <li>C#代码块用<strong>@{…}</strong>封装</li>
+  <li>行内表达式（变量或函数）用<strong>@</strong>开始</li>
+  <li>代码语句结尾用<strong>分号</strong></li>
+  <li>变量声明用关键字<strong>var</strong></li>
+  <li>字符串用<strong>引号</strong>封装</li>
+  <li>C#代码区分大小写</li>
+  <li>C#文件的扩展名用<strong>.cshtml</strong></li>
+</ul>
+
+<h6 id="c-example">C# Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;!--Single statement block --&gt;
+@{ var myMessage = "Hello  World"; }
+
+&lt;!-- Inline expression or variable --&gt;
+&lt;p&gt;The value of myMessage is: @myMessage&lt;/p&gt;
+
+&lt;!-- Multi-statement block --&gt;
+@{
+var greeting = "Welcome to our site!";
+var weekDay = DateTime.Now.DayOfWeek;
+var greetingMessage = greeting + " Today is: " + weekDay;
+}
+&lt;p&gt;The greeting is: @greetingMessage&lt;/p&gt;
+</code></pre>
+</div>
+<h3 id="关于vb的razor语法">关于VB的Razor语法</h3>
+
+<ul>
+  <li>VB代码块用<strong>@Code … End Code</strong>封装</li>
+  <li>行内表达式用<strong>@</strong>开始</li>
+  <li>变量声明用关键字<strong>Dim</strong></li>
+  <li>字符串用<strong>引号</strong>封装</li>
+  <li>VB代码不区分大小写</li>
+  <li>VB文件的扩展名是<strong>.vbhtml</strong></li>
+</ul>
+
+<h6 id="vb-example">VB Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;!-- Single statement block --&gt;
+@Code dim myMessage = "Hello World" End Code
+
+&lt;!-- Inline expression or variable --&gt;
+&lt;p&gt;The value of myMessage is: @myMessage&lt;/p&gt;
+
+&lt;!-- Multi-statement block --&gt;
+@Code
+dim greeting = "Welcome to our site!"
+dim weekDay = DateTime.Now.DayOfWeek
+dim greetingMessage = greeting &amp; " Today is: " &amp; weekDay
+End Code
+
+&lt;p&gt;The greeting is: @greetingMessage&lt;/p&gt;
+</code></pre>
+</div>
+<h3 id="更多关于c和visual-basic">更多关于C#和Visual Basic</h3>
+
+<p>如果你想学习更多关于Razor，C#和Visual Basic程序设计语言：</p>
+
+<p>Go to the Razor section of this tutorial.</p>
+
+      </section>
+      <section id="main_comment">
+        <noscript>Please enable JavaScript to view the comment form powered by <a href="https://commentit.io/">Comm(ent|it)</a></noscript>
+        <div id="commentit"></div>
+        <script type="text/javascript">
+          /** CONFIGURATION VARIABLES **/
+          var commentitUsername = 'sunss0518';
+          var commentitRepo = 'sunss0518/sunss0518.github.io';
+          var commentitPath = '_posts/2016-12-14-webpages_razor.md';
+        
+          /** DON'T EDIT FOLLOWING LINES **/
+          (function() {
+              var commentit = document.createElement('script');
+              commentit.type = 'text/javascript';
+              commentit.async = true;
+              commentit.src = 'https://commentit.io/static/embed/dist/commentit.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(commentit);
+          })();
+        </script>
+      </section>
+    </div>
+    <footer>
+      <div class="container">
+        <table>
+          <th><small>孙帅帅的博客</small></th>
+          <td><a href="http://weibo.com/2535244965/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" class="btn" target="_blank">Sina</a></td>
+          <td><a href="http://codepen.io/sunss0518/" class="btn" target="_blank">Codepen</a></td>
+        </table>
+      </div>
+    </footer>      
+  </body>
+</html>

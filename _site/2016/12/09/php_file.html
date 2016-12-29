@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/github-dark.css" media="screen">
+    <title>PHP 5 File Hangling</title>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>Sunss0518.GitHub.io</h1>
+        <h2></h2>
+        <section id="downloads">
+          <a href="https://github.com/sunss0518" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+    <div class="container">
+      <section id="main_content">
+        <h2 id="php-5-file-hangling">PHP 5 File Hangling</h2>
+
+<p>在所有web应用中，文件处理是一个重要部分。你经常需要打开并处理一个不同任务的文件。</p>
+
+<h3 id="php操作manipulating文件">PHP操作（Manipulating）文件</h3>
+
+<p>PHP有几个函数用作创建，读取，加载和编辑文件。</p>
+
+<h6 id="操作文件时请小心">操作文件时请小心！</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code>当你操作文件时，一定要小心谨慎。
+如果你操作错误，会造成许多损坏。常见的错误有：
+编辑错误文件，将垃圾数据塞满硬盘，意外删除文件内容。
+</code></pre>
+</div>
+<h3 id="php-readfile函数">PHP readfile()函数</h3>
+
+<p>readfile()函数读写文件到输出缓冲区。</p>
+
+<p>假设我们有一个叫做“webdictionary.txt”的文本文件储存在服务器上，如下：</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>AJAX = Asynchronous JavaScript and XML
+CSS = Cascading Style Sheets
+HTML = Hyper Text Markup Language
+PHP = PHP Hypertext Preprocessor
+SQL = Structured Query Language
+SVG = Scalable Vector Graphics
+XML = Extensible Markup Language
+</code></pre>
+</div>
+<p>读写一个文件到输出缓冲区的PHP代码如下：</p>
+
+<h6 id="example">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php 
+echo readfile("webdictionary.txt");
+?&gt;
+</code></pre>
+</div>
+<p>如果你想打开文件并读取它的内容，readfile()函数可以帮助你实现。</p>
+
+<hr />
+
+<h2 id="php-5-文件的打开读取关闭">PHP 5 文件的打开/读取/关闭</h2>
+
+<p>本章节我们将教你如何打开，读取，关闭服务器上的文件。</p>
+
+<h3 id="php-打开文件fopen">PHP 打开文件–fopen()</h3>
+
+<p>打开文件更好的方法是用fopen()函数。这个函数比readfile()函数有更多的操作。</p>
+
+<p>我们还用上文说到的“webdictionary.txt”文本文件。</p>
+
+<p>fopen()函数的第一个参数是要打开文件的名字，第二个参数是指定打开的方式。
+如果fopen()函数打不开指定文件，将生成一个消息，如下：</p>
+
+<h6 id="example-1">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+$myfile = fopen("webdictionary.txt", "r") or die("Unable to open file!");
+echo fread($myfile,filesize("webdictionary.txt"));
+fclose($myfile);
+?&gt;
+</code></pre>
+</div>
+<p><strong>小建议：</strong>fread()函数和fclose()函数会在下面解释。</p>
+
+<p>打开文件的方式有以下几种：</p>
+<table class="align-left">
+	<thead>
+		<tr class="color2">
+			<th class="left">方式</th>
+			<th class="right">描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="color1">
+			<td class="left">r</td>
+			<td class="right"><strong>打开一个只读文件。</strong>文件的指针在文件的开始处开始</td>
+		</tr>
+		<tr class="color2">
+			<td class="left">w</td>
+			<td class="right"><strong>打开一个只写文件。</strong>擦除文件的内容，如果文件不存在，则创建一个新文件。文件的指针在文件的开始处开始</td>
+		</tr>
+		<tr class="color1">
+			<td class="left">a</td>
+			<td class="right"><strong>打开一个只写文件。</strong>文件中存在的数据被保护,文件的指针在文件的结尾处开始。如果这个文件不存在，则创建一个新的文件</td>
+		</tr>
+		<tr class="color2">
+			<td class="left">x</td>
+			<td class="right"><strong>创建一个新的只写文件。</strong>如果文件已经存在，则返回一个“FALSE”的错误</td>
+		</tr>
+		<tr class="color1">
+			<td class="left">r+</td>
+			<td class="right"><strong>打开一个读写文件。</strong>文件的指针在文件的开始处开始</td>
+		</tr>
+		<tr class="color2">
+			<td class="left">w+</td>
+			<td class="right"><strong>打开一个读写文件。</strong>擦除文件的内容，如果文件不存在，则创建一个新文件。文件的指针在文件的开始处开始</td>
+		</tr>
+		<tr class="color1">
+			<td class="left">a+</td>
+			<td class="right"><strong>打开一个读写文件。</strong>文件中存在的数据被保护。文件的指针在文件的结尾处开始。如果文件不存在，则创建一个新的文件</td>
+		</tr>
+		<tr class="color2">
+			<td class="left">x+</td>
+			<td class="right"><strong>创建一个新的读写文件</strong>如果文件已经存在，则返回一个“FALSE”的错误</td>
+		</tr>
+	</tbody>
+</table>
+
+<h3 id="php-读文件fread">PHP 读文件–fread()</h3>
+
+<p>fread()函数从一个打开的文件读取。</p>
+
+<p>fread()函数的第一个参数是读取文件的名字，第二个参数是指定读取的最大字节数。</p>
+
+<p>读取“webdictionary.txt”文件的PHP代码：</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>fread($myfile, filesize("webdictionary.txt"));
+</code></pre>
+</div>
+<h3 id="php-关闭文件fclose">PHP 关闭文件–fclose()</h3>
+
+<p>fclose()函数用来关闭一个打开的文件。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>结束之后关闭文件是一个好的编程习惯。你一定不想一个在服务器上运转的文件一直占用资源
+</code></pre>
+</div>
+<p>fclose()函数需要文件的名字（或者一个保存文件名字的变量）：</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+$myfile = fopen("webdictionary.txt", "r");
+// some code to executed....
+fclose($myfile);
+?&gt;
+</code></pre>
+</div>
+<h3 id="php-读取单行fgets">PHP 读取单行–fgets()</h3>
+
+<p>fgets()函数从一个文件中读取单行。</p>
+
+<p>下面的例子输出“webdictionary.txt”的第一行：</p>
+
+<h6 id="example-2">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+$myfile = fopen("webdictionary.txt", "r") or die("Unable to open file!");
+echo fgets($myfile);
+fclose($myfile);
+?&gt;
+</code></pre>
+</div>
+<p><strong>注意：</strong>调用fgets()函数之后，文件的指针移动到下一行。</p>
+
+<h3 id="php-检查文件结尾feof">PHP 检查文件结尾–feof()</h3>
+
+<p>feof()函数检查是否已经到达文件结尾处。</p>
+
+<p>feof()函数对于未知长度依次通过的数据是有用的。</p>
+
+<p>下面的例子一行一行的读取“webdictionary.txt”文件，直到文件结尾处：</p>
+
+<h6 id="example-3">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+$myfile = fopen("webdictionary.txt", "r") or die("Unable to open file!");
+// Output one line until end-of-file
+while(!feof($myfile)) {
+    echo fgets($myfile) . "&lt;br&gt;";
+}
+eclose($myfile);
+?&gt;
+</code></pre>
+</div>
+<h3 id="php-读取单个字符fgetc">PHP 读取单个字符–fgetc()</h3>
+
+<p>fgetc()函数从一个文件中读取单个字符。</p>
+
+<p>下面的例子一字符一字符的读取“webdictionary.txt”文件，直到文件结尾处：</p>
+
+<h6 id="example-4">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+$myfile = fopen("webdictionary.txt", "r") or die("Unable to open file!");
+// Output one character until end-of-file
+while(!feof($myfile)) {
+    echo fgetc($myfile) . "&lt;br&gt;";
+}
+fclose($myfile);
+?&gt;
+</code></pre>
+</div>
+<p><strong>注意：</strong>调用fgetc()函数之后，文件的指针移动到下一个字符。</p>
+
+<hr />
+
+<h2 id="php-5-文件的创建写入">PHP 5 文件的创建/写入</h2>
+
+<p>本章节将教你如何去创建，写入服务器上的文件。</p>
+
+<h3 id="php-创建文件fopen">PHP 创建文件–fopen()</h3>
+
+<p>fopen()函数用来创建文件。或许你会有一点迷惑，但在PHP中，创建文件和打开文件用相同的函数。</p>
+
+<p>如果你用fopen()操作一个不存在的文件，则会创建它，打开文件的方式可以是writing(w)或appending(a)。</p>
+
+<p>下面的例子将会创建一个叫“testfile.txt”的新文件：</p>
+
+<h6 id="example-5">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code>$myfile = fopen("testfile.txt", "w");
+</code></pre>
+</div>
+<h4 id="php-文件许可">PHP 文件许可</h4>
+
+<p>如果你尝试运行代码发生错误，请检查是否获取将信息写入硬盘的权限。</p>
+
+<h3 id="php-写入文件fwrite">PHP 写入文件–fwrite()</h3>
+
+<p>fwrite()函数用来写入文件。</p>
+
+<p>fwrite()函数的第一个参数是文件的名字，第二个参数是写入的字符串。</p>
+
+<p>下面的例子写入一对名字到“newfile.txt”中：</p>
+
+<h6 id="example-6">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+$myfile = fopen("newfile.txt", "w") or die("Unable to open file!");
+$txt = "John Doe\n";
+fwrirte($myfile, $txt);
+$txt = "Jane Doe\n";
+fwrite($myfile, $txt);
+fclose($myfile);
+?&gt;
+</code></pre>
+</div>
+<p>注意，我们写入了两次。</p>
+
+<p>如果打开“newfile.txt”，显示如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>John Doe
+Jane Doe
+</code></pre>
+</div>
+<h3 id="php-重写overwriting">PHP 重写(overwriting)</h3>
+
+<p>现在“newfile.txt”包含了一些数据，我们想一下当用writing的方式打开一个存在的文件时会发生什么。文件中所有的数据会被擦除，成为一个空文件。</p>
+
+<p>下面的例子我们打开文件“newfile.txt”，写入一些新的数据：</p>
+
+<h6 id="example-7">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+$myfile = fopen("newfile.txt", "w") or die("Unable to open file!");
+$txt = "Mickey Mouse\n";
+fwrite($myfile, $txt);
+$txt = "Minnie Mouse\n";
+fwrite($myfile, $txt);
+fclose($myfile);
+?&gt;
+</code></pre>
+</div>
+<p>如果我们现在打开“newfile.txt”，John和Jane都消失了，只剩下我们刚刚写入的数据：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Mickey Mouse
+Minnie Mouse
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="php-5-文件的上传">PHP 5 文件的上传</h2>
+
+<p>对于PHP来说，上传文件到服务器很简单。</p>
+
+<p>然而，它容易带来危险，所以允许文件上传时需要小心谨慎。</p>
+
+<h3 id="配置phpini文件">配置“php.ini”文件</h3>
+
+<p>首先，确定一下PHP的配置是否允许文件的上传。</p>
+
+<p>在你的“php.ini”文件中，查找到“file_uploads”，将它设置成“On”：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>file_upload = On
+</code></pre>
+</div>
+<h3 id="创建html表格">创建HTML表格</h3>
+
+<p>接下来，创建一个HTML表格，允许用户选择他们想要上传的图片文件：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"upload.php"</span> <span class="na">method=</span><span class="s">"post"</span> <span class="na">enctype=</span><span class="s">"multipart/form-data"</span><span class="nt">&gt;</span>
+    Select image to upload:
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">name=</span><span class="s">"fileToUpload"</span> <span class="na">id=</span><span class="s">"fileToUpload"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"Upload Image"</span> <span class="na">name=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+<p>上面的表格遵循以下规则：</p>
+
+<ul>
+  <li>确定表格的发送方式使用“post”</li>
+  <li>表格也需要以下属性：enctype=”multipart/form-data”.它指定了表格提交时的内容类型(content-type)。</li>
+</ul>
+
+<p>没有遵循上面要求的规则，文件将不能上传。</p>
+
+<p>其它的一些注意事项：</p>
+
+<ul>
+  <li>属性type=”file”的input标签将input作为文件选择控制区。</li>
+</ul>
+
+<p>上面表格发送数据到“upload.php”，接下来我们创建它。</p>
+
+<h3 id="创建上传文件的php脚本">创建上传文件的PHP脚本</h3>
+
+<p>“upload.php”文件代码：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+$target_dir = "uploads/";
+$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+$uploadOk = 1;
+$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+// Check if image file is a actual image or fake image
+if(isset($_POST["submit"])) {
+    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+    if($check !== false) {
+        echo "File is an image - " . $check["mime"] . ".";
+        $uploadOk = 1;
+    } else {
+        echo "File is not a image.";
+        $uploadOk = 0;
+    }
+}
+?&gt;
+</code></pre>
+</div>
+<p>PHP脚本解释：</p>
+
+<ul>
+  <li>$target_dir = “upload/” - 指定文件将要被放置的目录</li>
+  <li>$target_file 指定上传的路径</li>
+  <li>$uploadOk = 1 还没被使用（不久将被使用）</li>
+  <li>$imageFileType 保存文件的扩展名</li>
+  <li>接下来检查图片文件是真的还是假的</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>**注意：**你需要在“upload.php”所在的目录创建一个叫做“uploads”的目录,上传的文件将被存放在那里。
+</code></pre>
+</div>
+<h3 id="检查文件是否已经存在">检查文件是否已经存在</h3>
+
+<p>现在，我们可以添加一些限制。</p>
+
+<p>首先，我们检查文件在“uploads”文件夹中是否存在。如果它不存在，显示一个错误信息，并将$uploadOk设置成0：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// Check if file already exists
+if (file_exists($target_file)) {
+    echo "Sorry, file already exists.";
+    $uploadOk = 0;
+}
+</code></pre>
+</div>
+
+<h3 id="限制文件大小">限制文件大小</h3>
+
+<p>现在，我们想要检查文件的大小。如果文件超过500KB，显示一个错误信息，并将$uploadOk设置成0：</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>// Check file size
+if ($_FILES["fileToUpload"]["size"] &gt; 500000) {
+    echo "Sorry, your file is too large.";
+    $uploadOk = 0;
+}
+</code></pre>
+</div>
+<h3 id="限制文件类型">限制文件类型</h3>
+
+<p>下面的代码表示只允许用户上传JPG，JPEG和GIF类型的文件。其它的所有文件类型则会显示一个错误消息，并将$uploadOk设置成0：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// Allow certain file formats
+if($imageFileType != "jpg" &amp;&amp; $imageFileType != "png" &amp;&amp; 
+$imageFileType != "jpeg" &amp;&amp; $imageFileType != "gif") {
+    echo "Sorry, only JPG, JPEG, PNG &amp; GIF files are allowed.";
+    $uploadOk = 0;
+}
+</code></pre>
+</div>
+<h3 id="完整的文件上传php脚本">完整的文件上传PHP脚本：</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+$target_dir = "uploads/";
+$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+$uploadOk = 1;
+$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+// Check if image file is a actual image or fake image
+if(isset($_POST["submit"])) {
+    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+    if($check !== false) {
+        echo "File is an image - " . $check["mime"] . ".";
+        $uploadOk = 1;
+    } else {
+        echo "File is not an image.";
+        $uploadOk = 0;    
+    }
+}
+// Check if file already exists
+if (file_exists($target_file)) {
+    echo "Sorry, file already exists.";
+    $uploadOk = 0;
+}
+// Check file size
+if ($_FILES["fileToUpload"]["size"] &gt; 500000) {
+    echo "Sorry, your file is too large.";
+    $uploadOk = 0;
+}
+// Allow centain file formats
+if($imageFileType != "jpg" &amp;&amp; $imageFileType != "png" &amp;&amp; 
+$imageFileType != "jpeg" &amp;&amp; imageFileType != "gif") {
+    echo "Sorry, only JPG, JPEG, PNG &amp; GIF files are allowed.";
+    $uploadOk = 0;
+}
+// Check if $uploadOk is set to 0 by an error
+if ($uploadOk == 0) {
+    echo "Sorry, your file was not uploaded.";
+// if everything is ok, try to upload file
+} else {
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],$target_file)) {
+        echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
+    } else {
+        echo "Sorry, there was an error uploading your file.";
+    }
+}
+?&gt;
+</code></pre>
+</div>
+
+      </section>
+      <section id="main_comment">
+        <noscript>Please enable JavaScript to view the comment form powered by <a href="https://commentit.io/">Comm(ent|it)</a></noscript>
+        <div id="commentit"></div>
+        <script type="text/javascript">
+          /** CONFIGURATION VARIABLES **/
+          var commentitUsername = 'sunss0518';
+          var commentitRepo = 'sunss0518/sunss0518.github.io';
+          var commentitPath = '_posts/2016-12-9-php_file.md';
+        
+          /** DON'T EDIT FOLLOWING LINES **/
+          (function() {
+              var commentit = document.createElement('script');
+              commentit.type = 'text/javascript';
+              commentit.async = true;
+              commentit.src = 'https://commentit.io/static/embed/dist/commentit.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(commentit);
+          })();
+        </script>
+      </section>
+    </div>
+    <footer>
+      <div class="container">
+        <table>
+          <th><small>孙帅帅的博客</small></th>
+          <td><a href="http://weibo.com/2535244965/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" class="btn" target="_blank">Sina</a></td>
+          <td><a href="http://codepen.io/sunss0518/" class="btn" target="_blank">Codepen</a></td>
+        </table>
+      </div>
+    </footer>      
+  </body>
+</html>

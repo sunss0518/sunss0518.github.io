@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/github-dark.css" media="screen">
+    <title>PHP 5 Cookies</title>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>Sunss0518.GitHub.io</h1>
+        <h2></h2>
+        <section id="downloads">
+          <a href="https://github.com/sunss0518" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+    <div class="container">
+      <section id="main_content">
+        <h2 id="php-5-cookies">PHP 5 Cookies</h2>
+
+<p>cookie通常被用来验证用户身份</p>
+
+<h3 id="cookie是什么">Cookie是什么？</h3>
+
+<p>cookie通常被用来验证用户身份。cookie是服务器上的一个小文件，嵌入 在用户的电脑上。每次同一台电脑上的浏览器请求一个页面时，也会发送cookie。用PHP，你可以创建和恢复cookie值。</p>
+
+<h3 id="用php创建cookie">用PHP创建Cookie</h3>
+
+<p>用setcookie()函数创建一个cookie</p>
+
+<h4 id="语法">语法</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>setcookie(name, value, expire, path, domain, secure, httponly);
+</code></pre>
+</div>
+<p>只有name参数是必要的。其它参数都是可选的。</p>
+
+<h3 id="php-创建恢复一个cookie">PHP 创建/恢复一个Cookie</h3>
+
+<p>下面的例子创建一个名字为“user”，值为“John Doe”的cookie。cookie将在30天（86400 * 30）后失效。“/”意味着在全部的网站可以获取到cookie。</p>
+
+<p>然后，我们恢复“user”的值（用全局变量$_COOKIE）。如果已经设置了cookie，我们可以用isset()函数去发现它。</p>
+
+<h6 id="example">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php
+$cookie_name = "user";
+$cookie_value = "John Doe";
+setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
+?&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="cp">&lt;?php
+if(!isset($_COOKIE[$cookie_name])) {
+    echo "Cookie named '" . $cookie_name . "' is set!&lt;br&gt;";
+    echo "Value is: " . $_COOKIE[$cookie_name];
+}
+?&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+<div class="highlighter-rouge"><pre class="highlight"><code>注意：setcookie()函数必需出现在<span class="nt">&lt;html&gt;</span>标签之前。
+</code></pre>
+</div>
+<p><strong>注意：</strong>发送cookie时cookie的值自动编码，接收时自动解码（阻止URL编码，用setrawcookie()代替）。</p>
+
+<h3 id="修改cookie值">修改Cookie值</h3>
+
+<p>修改一个cookie值，只需要用setcookie()函数设置（again）cookie：</p>
+
+<h6 id="example-1">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php
+$cookie_name = "user";
+$cookie_value = "Alex Porter";
+setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
+?&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="cp">&lt;?php
+if(!isset($_COOKIE[$cookie_name])) {
+    echo "Cookie named '" . $cookie_name . "' is not set!";
+} else {
+    echo "Cookie '" . $cookie_name . "' is set!&lt;br&gt;";
+    echo "Value is: " . $_COOKIE[$cookie_name];
+}
+?&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+<h3 id="删除cookie">删除Cookie</h3>
+
+<p>删除cookie，用setcookie()函数设置一个过去的日期作为失效日期。</p>
+
+<h6 id="example-2">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php
+// set the expiration date to one hour ago
+setcookie("user", "", time() - 3600);
+?&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="cp">&lt;?php
+echo "Cookie 'user' is deleted.";
+?&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+<h3 id="检查cookie是否已经启用">检查Cookie是否已经启用</h3>
+
+<p>下面的例子创建一个小脚本去检查cookie是否已经被启用。首先，尝试用setcookie()函数创建一个测试的cookie，然后给$_COOKIE变量计数：</p>
+
+<h6 id="example-3">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php
+setcookie("test_cookie", "test", time() + 3600, "/");
+?&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="cp">&lt;?php
+if(count($_COOKIE) &gt; 0) {
+    echo "Cookies are enabled.";
+} else {
+    echo "Cookies are disabled.";
+}
+?&gt;</span>
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+      </section>
+      <section id="main_comment">
+        <noscript>Please enable JavaScript to view the comment form powered by <a href="https://commentit.io/">Comm(ent|it)</a></noscript>
+        <div id="commentit"></div>
+        <script type="text/javascript">
+          /** CONFIGURATION VARIABLES **/
+          var commentitUsername = 'sunss0518';
+          var commentitRepo = 'sunss0518/sunss0518.github.io';
+          var commentitPath = '_posts/2016-12-11-php_cookies.md';
+        
+          /** DON'T EDIT FOLLOWING LINES **/
+          (function() {
+              var commentit = document.createElement('script');
+              commentit.type = 'text/javascript';
+              commentit.async = true;
+              commentit.src = 'https://commentit.io/static/embed/dist/commentit.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(commentit);
+          })();
+        </script>
+      </section>
+    </div>
+    <footer>
+      <div class="container">
+        <table>
+          <th><small>孙帅帅的博客</small></th>
+          <td><a href="http://weibo.com/2535244965/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" class="btn" target="_blank">Sina</a></td>
+          <td><a href="http://codepen.io/sunss0518/" class="btn" target="_blank">Codepen</a></td>
+        </table>
+      </div>
+    </footer>      
+  </body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/github-dark.css" media="screen">
+    <title>AJAX</title>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>Sunss0518.GitHub.io</h1>
+        <h2></h2>
+        <section id="downloads">
+          <a href="https://github.com/sunss0518" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+    <div class="container">
+      <section id="main_content">
+        <h2 id="ajax-introduction">AJAX Introduction</h2>
+
+<p>AJAX用来更新网页的一部分，不用重新加载整个页面。</p>
+
+<h3 id="ajax是什么">AJAX是什么？</h3>
+
+<p>AJAX = Asynchronous JavaScript and XML。</p>
+
+<p>AJAX是一种用于创建快速且动态的web页面的技术。</p>
+
+<p>AJAX允许通过和服务器后端交换小量数据实现web页面异步更新的场景。这意味着不用加载整个页面就可以更新页面的一部分。</p>
+
+<p>对于传统的页面来说，如果内容发生改变，必需重新加载整个页面。</p>
+
+<p>用AJAX技术的应用：Google Maps，Gmail，Youtube和Facebook tabs。</p>
+
+<p><img src="/images/ajax.gif" alt="How AJAX Works" /></p>
+
+<h3 id="ajax-is-based-on-internet-standards">AJAX is Based on Internet Standards</h3>
+
+<p>AJAX is based on internet standards, and uses a combination of:</p>
+
+<ul>
+  <li>XMLHttpRequest object (to exchange data asynchronously with a server)</li>
+  <li>JavaScript/DOM (to display/interact with the information)</li>
+  <li>CSS (to style the data)</li>
+  <li>XML (often used as the format for transferring data)</li>
+</ul>
+
+<div class="text">
+	AJAX application are browser- and platform-independent!
+</div>
+
+<h3 id="google-suggest">Google Suggest</h3>
+
+<p>AJAX was made popular in 2005 by Google, with Google Suggest.</p>
+
+<p>Google Suggest is using AJAX to create a very dynamic web interface; When you start typing in Google’s search box, a JavaScript sends the letters off to a server and the server returns a list of suggestions.</p>
+
+<h3 id="start-using-ajax-today">Start Using AJAX Today</h3>
+
+<p>In our PHP tutorial, we will demonstrate how AJAX can update parts of a web page, without reloading the whole page. The server script will be written in PHP.</p>
+
+<p>If you want to learn more about AJAX, visit our AJAX tutorial.</p>
+
+<hr />
+
+<h2 id="php---ajax-and-php">PHP - AJAX and PHP</h2>
+
+<p>AJAX用于创建更多的交互应用。</p>
+
+<h3 id="ajax-php-example">AJAX PHP Example</h3>
+
+<p>下面的例子将演示当用户向输入区域打字时web页面如何同web服务器交流：</p>
+
+<h6 id="example">Example</h6>
+<div class="text">
+	<p><strong>Start typing a name in the input field below:</strong></p>
+	<p>First name: <input type="text" name="firstname" /></p>
+	<p>Suggestions:</p>
+</div>
+
+<h3 id="example-explained">Example Explained</h3>
+
+<p>上面的例子中，当用户打一个字符到输入区域时，一个叫做“showHint()”的函数被执行。</p>
+
+<p>函数通过onkeyup事件触发。</p>
+
+<p>下面是HTML代码：</p>
+
+<h6 id="example-1">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"txtHint"</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">""</span><span class="p">;</span>
+		<span class="k">return</span><span class="p">;</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">xmlhttp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+	    <span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	    	<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">readyState</span><span class="p">)</span> <span class="p">{</span>
+	    		<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"txtHint"</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">reponseText</span><span class="p">;</span>
+	    	<span class="p">}</span>
+	    <span class="p">};</span>
+	    <span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"GET"</span><span class="p">,</span> <span class="s2">"gethint.php?q="</span> <span class="o">+</span> <span class="nx">str</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+	    <span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+	<span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;p&gt;&lt;b&gt;</span>Start typing a name in the input field below:<span class="nt">&lt;/b&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;form&gt;</span>
+	First name: <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">onkeyup=</span><span class="s">"showHint(this.value)"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;p&gt;</span>Suggestions: <span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">"txtHint"</span><span class="nt">&gt;&lt;/span&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+<p>代码解析：</p>
+
+<p>首先，检查输入区域是否是空的（str.length == 0）。如果为空，清除txtHint占位符的内容并退出函数。</p>
+
+<p>然而， 如果输入区域不是空的，做下列事情：</p>
+
+<ul>
+  <li>创建一个XMLHttpRequest对象</li>
+  <li>当服务器响应后创建函数去执行</li>
+  <li>Send the request off to a PHP file (gethint.php) on the server</li>
+  <li>Notice that q parameter is added to the url (gethint.php?q=”+str)</li>
+  <li>And the str variable holds the content of the input field</li>
+</ul>
+
+<h3 id="the-php-file---gethintphp">The PHP File - “gethint.php”</h3>
+
+<p>“gethint.php”检查名字数组并返回符合的名字给浏览器：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+// Array with names
+$a[] = "Anna";
+$a[] = "Brittany";
+$a[] = "Cinderella";
+$a[] = "Diana";
+$a[] = "Eva";
+$a[] = "Fiona";
+$a[] = "Gunda";
+$a[] = "Hege";
+$a[] = "Inga";
+$a[] = "Johanna";
+$a[] = "Kitty";
+$a[] = "Linda";
+$a[] = "Nina";
+$a[] = "Ophelia";
+$a[] = "Petunia";
+$a[] = "Amanda";
+$a[] = "Raquel";
+$a[] = "Cindy";
+$a[] = "Doris";
+$a[] = "Eve";
+$a[] = "Evita";
+$a[] = "Sunniva";
+$a[] = "Tove";
+$a[] = "Unni";
+$a[] = "Violet";
+$a[] = "Liza";
+$a[] = "Elizabeth";
+$a[] = "Ellen";
+$a[] = "Wenche";
+$a[] = "Vicky";
+
+// get the q parameter from URL
+$q = $_REQUEST["q"];
+
+$hint = "";
+
+// lookup all hints from array if $q is different from ""
+if ($q !== "") {
+    $q = strtolower($q);
+    $len = strlen($q);
+    foreach($a as $name) {
+        if (stristr($q, substr($name, 0, $len))) {
+            if ($hint === "") {
+                $hint = $name;
+            } else {
+                $hint .= ", $name";
+            }
+        }
+    }
+}
+
+// Output "no suggestion" if no hint was found or output correct values
+echo $hint === "" ? "no suggestion" : $hint;
+?&gt;
+</code></pre>
+</div>
+
+      </section>
+      <section id="main_comment">
+        <noscript>Please enable JavaScript to view the comment form powered by <a href="https://commentit.io/">Comm(ent|it)</a></noscript>
+        <div id="commentit"></div>
+        <script type="text/javascript">
+          /** CONFIGURATION VARIABLES **/
+          var commentitUsername = 'sunss0518';
+          var commentitRepo = 'sunss0518/sunss0518.github.io';
+          var commentitPath = '_posts/2016-12-24-php_ajax.md';
+        
+          /** DON'T EDIT FOLLOWING LINES **/
+          (function() {
+              var commentit = document.createElement('script');
+              commentit.type = 'text/javascript';
+              commentit.async = true;
+              commentit.src = 'https://commentit.io/static/embed/dist/commentit.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(commentit);
+          })();
+        </script>
+      </section>
+    </div>
+    <footer>
+      <div class="container">
+        <table>
+          <th><small>孙帅帅的博客</small></th>
+          <td><a href="http://weibo.com/2535244965/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" class="btn" target="_blank">Sina</a></td>
+          <td><a href="http://codepen.io/sunss0518/" class="btn" target="_blank">Codepen</a></td>
+        </table>
+      </div>
+    </footer>      
+  </body>
+</html>

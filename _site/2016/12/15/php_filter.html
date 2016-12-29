@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/github-dark.css" media="screen">
+    <title>PHP Filters</title>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>Sunss0518.GitHub.io</h1>
+        <h2></h2>
+        <section id="downloads">
+          <a href="https://github.com/sunss0518" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+    <div class="container">
+      <section id="main_content">
+        <h2 id="php-filters">PHP Filters</h2>
+
+<p>Validating data = 确定数据是否处于适当的形式</p>
+
+<p>Sanitizing data = 移除数据中所有非法的字符</p>
+
+<h3 id="the-php-filter扩展">The PHP Filter扩展</h3>
+
+<p>PHP filters用于验证并净化（sanitize）外部输入</p>
+
+<p>PHP filter扩展有许多用于检查用户输入所需的函数，它使得数据验证更简单更快速</p>
+
+<p>filter_list()函数用来列举PHP filter提供的扩展：</p>
+
+<h6 id="example">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;table&gt;
+    &lt;tr&gt;
+    	&lt;td&gt;Filter Name&lt;/td&gt;
+    	&lt;td&gt;Filter ID&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;?php
+    foreach (filter_list() as $id =&gt; $filter) {
+        echo '&lt;tr&gt;&lt;td&gt;' . $filter . '&lt;/td&gt;&lt;td&gt;' . 
+        filter_id($filter) . '&lt;/td&gt;&lt;/tr&gt;';
+    }
+    ?&gt;
+&lt;/table&gt;
+</code></pre>
+</div>
+<h3 id="为什么用filters">为什么用Filters？</h3>
+
+<p>许多web应用接收外部输入。外部输入/数据可以是：</p>
+
+<ul>
+  <li>用户输入的表单</li>
+  <li>Cookies</li>
+  <li>Web服务器数据</li>
+  <li>服务器变量</li>
+  <li>数据库查询结果</li>
+</ul>
+
+<div class="text">
+	<strong>你应该经常验证数据！</strong>
+	<p>提交的无效数据可能导致安全问题，造成网页的损坏！</p>
+	<p>用filter你可以确信应用得到正确的输入！</p>
+</div>
+
+<h3 id="php-filter_var函数">PHP filter_var()函数</h3>
+
+<p>filter_var()函数可以验证且净化数据。</p>
+
+<p>filter_var()函数指定一个过滤器过滤单个变量。它需要两个数据：</p>
+
+<ul>
+  <li>你想要检查的变量</li>
+  <li>用来检查的类型</li>
+</ul>
+
+<h6 id="example-1">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+$str = "&lt;h1&gt;Hello World!&lt;/h1&gt;";
+$newstr = filter_var($str, FILTER_SANITIZE_STRING);
+echo $newstr;
+?&gt;
+</code></pre>
+</div>
+<h3 id="验证整数">验证整数</h3>
+
+<p>下面的例子用filter_var()函数检查变量$int是否是一个整数。如果$int是一个整数，则输出：“Integer is valid”。如果$int不是一个整数，则输出：“Integer is not valid”：</p>
+
+<h6 id="example-2">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+$int = 100;
+
+if (!filter_var($int, FILTER_VALIDATE_INT) === false) {
+    
+    echo("Integer is valid");
+} else {
+    echo("Integer is not valid");
+}
+?&gt;
+</code></pre>
+</div>
+<h4 id="小建议filter_var关于0的问题">小建议：filter_var()关于0的问题</h4>
+
+<p>在上面的例子中，如果将$int设置为0，则返回“Integer is not valid”。用下面的代码解决这个问题：</p>
+
+<h6 id="example-3">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+$int = 0;
+
+if (filter_var($int, FILTER_VALIDATE_INT) === 0 || 
+!filter_var($int, FILTER_VALIDATE_INT) === false) {
+    echo("Integer is valid");
+} else {
+    echo("Integer is not valid");
+}
+?&gt;
+</code></pre>
+</div>
+<h3 id="验证ip地址">验证IP地址</h3>
+
+<p>下面的例子用filter_var()函数检查变量$ip是否是一个有效的IP地址：</p>
+
+<h6 id="example-4">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+$ip = "127.0.0.1";
+
+if (!filter_var($ip, FILTER_VALIDATE_IP) === false) {
+    echo("$ip is a valid IP address");
+} else {
+    echo("$ip is not a valid IP address");
+}
+?&gt;
+</code></pre>
+</div>
+<h3 id="净化和验证email地址">净化和验证Email地址：</h3>
+
+<p>下面的例子用filterI_var()函数首先移除变量$email中所有非法的字符，然后检查它是否为一个有效的email地址：</p>
+
+<h6 id="example-5">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+$email = "join.doe@example.com";
+
+// Remove all illegal characters from email
+$email = filter_var($email, FILTER_SANITIZE_EMAIL);
+
+// Validate e-mail
+if (!filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+    echo("$email is a valid email address");
+} else {
+    echo("$email is not a valid email address");
+}
+?&gt;
+</code></pre>
+</div>
+<h3 id="净化和验证url">净化和验证URL</h3>
+
+<p>下面的例子用filter_var()函数首先移除URL中所有非法的字符，然后检查$url是否是一个有效的字符：</p>
+
+<h6 id="example-6">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+$url = "http://www.w3school.com";
+
+// Remove all illegal characters from a url
+$url = filter_var($url, FILTER_SANITIZE_URL);
+
+// Validate url
+if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+    echo("$url is a valid URL");
+} else {
+    echo("$url is not a valid URL");
+}
+?&gt;
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="php-filters-advanced">PHP Filters Advanced</h2>
+
+<h3 id="验证范围内的整数">验证范围内的整数</h3>
+
+<p>下面的例子用filter_var()函数检查一个变量是否是一个整数类型且在1~200范围内：</p>
+
+<h6 id="example-7">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+$int = 122;
+$min = 1;
+$max = 200;
+
+if (filter_var($int, FILTER_VALIDATE_INT, array("options" =&gt; 
+array("min_range" =&gt; $min, "max_range" =&gt; $max))) === false) {
+	echo("Variable value is not within the legal range");
+} else {
+	echo("Variable value is within the legal range");
+}
+?&gt;
+</code></pre>
+</div>
+<h3 id="验证ipv6地址">验证IPv6地址</h3>
+
+<p>下面的例子用filter_var()函数检查变量$ip是否是一个有效的IPv6地址：</p>
+
+<h6 id="example-8">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+$ip = "2001:0db8:85d3:1319:8a2e:0370:7334";
+
+if (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) === false) {
+	echo("$ip is a valid IPv6 address");
+} else {
+	echo("$ip is not a valid IPv6 adress");
+}
+?&gt;
+</code></pre>
+</div>
+<h3 id="验证url必需包含查询字符串querystring">验证URL–必需包含查询字符串（querystring）</h3>
+
+<p>下面的例子用filter_var()函数检查变量$url是一个用查询字符串的URL：</p>
+
+<h6 id="example-9">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+$url = "http://www.w3schools.com";
+
+if (!filter_var($url, FILTER_VALIDATE_URL, FILTER_FLAG_QUERY_REQUIRED) 
+=== false) {
+	echo("$url is a valid URL");
+} else {
+	echo("$url is not a valid URL");
+}
+?&gt;
+</code></pre>
+</div>
+<h6 id="移除ascii大于127的值的字符">移除ASCII大于127的值的字符</h6>
+
+<p>下面的例子用filter_var()函数净化字符串。它将移除所有HTML标签和所有ASCII大于127的值的字符：</p>
+
+<h6 id="example-10">Example</h6>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+$str = "&lt;h1&gt;Hello WorldÆØÅ!&lt;/h1&gt;";
+
+$newstr = filter_var($str, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+echo $newstr;
+?&gt;
+</code></pre>
+</div>
+
+      </section>
+      <section id="main_comment">
+        <noscript>Please enable JavaScript to view the comment form powered by <a href="https://commentit.io/">Comm(ent|it)</a></noscript>
+        <div id="commentit"></div>
+        <script type="text/javascript">
+          /** CONFIGURATION VARIABLES **/
+          var commentitUsername = 'sunss0518';
+          var commentitRepo = 'sunss0518/sunss0518.github.io';
+          var commentitPath = '_posts/2016-12-15-php_filter.md';
+        
+          /** DON'T EDIT FOLLOWING LINES **/
+          (function() {
+              var commentit = document.createElement('script');
+              commentit.type = 'text/javascript';
+              commentit.async = true;
+              commentit.src = 'https://commentit.io/static/embed/dist/commentit.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(commentit);
+          })();
+        </script>
+      </section>
+    </div>
+    <footer>
+      <div class="container">
+        <table>
+          <th><small>孙帅帅的博客</small></th>
+          <td><a href="http://weibo.com/2535244965/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" class="btn" target="_blank">Sina</a></td>
+          <td><a href="http://codepen.io/sunss0518/" class="btn" target="_blank">Codepen</a></td>
+        </table>
+      </div>
+    </footer>      
+  </body>
+</html>
