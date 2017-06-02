@@ -1,9 +1,9 @@
 ---
 layout: post
 title: ASP和ASP.NET教程
+tag: asp
 ---
 ## {{ page.title }}
-
 <div class="text">
     <ul>
     	<li>ASP代表Active Server Pages</li>
@@ -21,6 +21,7 @@ title: ASP和ASP.NET教程
 		<li>ASP.NET Core</li>
 	</ul>
 </div>
+
 ### ASP技术
 
 ASP和ASP.NET是服务器端技术。

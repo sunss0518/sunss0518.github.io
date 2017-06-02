@@ -11,42 +11,174 @@
   <body>
     <header>
       <div class="container">
-        <h1>Sunss0518.GitHub.io</h1>
-        <h2></h2>
-        <section id="downloads">
-          <a href="https://github.com/sunss0518" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
+        <h1>的博客</h1>
+        <a href="https://github.com/sunss0518" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        <label id="toggle" for="nav-toggle" class="btn">三</label>
+        <input type="checkbox" id="nav-toggle" />
+        <nav>
+          <ul>
+            <li><a href="#" id="index">首页</a>
+            <li><a href="#1" id="css">CSS</a>
+            <li><a href="#2" id="js">JavaScript</a>
+            <li><a href="#3" id="threejs">ThreeJS</a>
+            <li><a href="#4" id="php">PHP</a>
+            <li><a href="#5" id="asp">ASP</a></li>
+          </ul>
+        </nav>
       </div>
     </header>
-    <div class="container">
-      <section id="main_content">
-        <ul>
+    <main>
+      <div class="container">
+        <section id="main_content">
+          <ul>
 	
-	    <li>24 Dec 2016 <a href="/2016/12/24/php_ajax.html">AJAX</a> <button class="btn">button</button></li>
 	
-	    <li>19 Dec 2016 <a href="/2016/12/19/php_mysql_intro.html">PHP MySQL Database</a> <button class="btn">button</button></li>
+	  <li class="card"><a href="/2017/05/18/JavaScript_Closures_Demystified.html" class="title">JavaScript闭包揭秘</a>
+	  	<span class="tag js">js</span>
+	  	<span class="date">18 May 2017</span>
+	  	<div class="excerpt">
+	  		
+
+	  	</div>
+	  </li>
 	
-	    <li>17 Dec 2016 <a href="/2016/12/17/php_error.html">PHP Error Handling</a> <button class="btn">button</button></li>
+	  <li class="card"><a href="/2016/12/24/php_ajax.html" class="title">AJAX</a>
+	  	<span class="tag php">php</span>
+	  	<span class="date">24 Dec 2016</span>
+	  	<div class="excerpt">
+	  		<h2 id="ajax-introduction">AJAX Introduction</h2>
+<p>AJAX用来更新网页的一部分，不用重新加载整个页面。</p>
+
+
+	  	</div>
+	  </li>
 	
-	    <li>15 Dec 2016 <a href="/2016/12/15/php_filter.html">PHP Filters</a> <button class="btn">button</button></li>
+	  <li class="card"><a href="/2016/12/24/ThreeJS_Reference_Core_Object3D.html" class="title">Object3D</a>
+	  	<span class="tag threejs">threejs</span>
+	  	<span class="date">24 Dec 2016</span>
+	  	<div class="excerpt">
+	  		<h1 id="object3d">Object3D</h1>
+<p>Object3D是three.js中大多数对象的基类，并且提供了一组用于操作3D空间中对象的属性和方法。
+<br /><br />
+注意，它可以通过<strong>.add</strong>方法将对象添加为子对象进行对象分组，但是最好使用<strong>Group</strong></p>
+
+
+	  	</div>
+	  </li>
 	
-	    <li>14 Dec 2016 <a href="/2016/12/14/webpages_razor.html">ASP.NET Web Pages - 添加Razor代码</a> <button class="btn">button</button></li>
+	  <li class="card"><a href="/2016/12/19/php_mysql_intro.html" class="title">PHP MySQL Database</a>
+	  	<span class="tag php">php</span>
+	  	<span class="date">19 Dec 2016</span>
+	  	<div class="excerpt">
+	  		<h2 id="php-mysql-database">PHP MySQL Database</h2>
+<p>你可能需要用PHP连接和操作数据库。
+<br /><br />
+PHP最流行的数据库是MySQL。</p>
+
+
+	  	</div>
+	  </li>
 	
-	    <li>13 Dec 2016 <a href="/2016/12/13/webpages_intro.html">Webpages Introduce</a> <button class="btn">button</button></li>
+	  <li class="card"><a href="/2016/12/17/php_error.html" class="title">PHP Error Handling</a>
+	  	<span class="tag php">php</span>
+	  	<span class="date">17 Dec 2016</span>
+	  	<div class="excerpt">
+	  		<h2 id="php-error-handling">PHP Error Handling</h2>
+<p>PHP中默认的错误操作是非常简单的。浏览器发送的一个错误信息包含文件名字，行数和信息描述。</p>
+
+
+	  	</div>
+	  </li>
 	
-	    <li>13 Dec 2016 <a href="/2016/12/13/asp_default.html">ASP和ASP.NET教程</a> <button class="btn">button</button></li>
+	  <li class="card"><a href="/2016/12/15/php_filter.html" class="title">PHP Filters</a>
+	  	<span class="tag php">php</span>
+	  	<span class="date">15 Dec 2016</span>
+	  	<div class="excerpt">
+	  		<h2 id="php-filters">PHP Filters</h2>
+<p>Validating data = 确定数据是否处于适当的形式
+<br /><br />
+Sanitizing data = 移除数据中所有非法的字符</p>
+
+
+	  	</div>
+	  </li>
 	
-	    <li>11 Dec 2016 <a href="/2016/12/11/php_session.html">PHP 5 Sessions</a> <button class="btn">button</button></li>
+	  <li class="card"><a href="/2016/12/14/webpages_razor.html" class="title">ASP.NET Web Pages - 添加Razor代码</a>
+	  	<span class="tag asp">asp</span>
+	  	<span class="date">14 Dec 2016</span>
+	  	<div class="excerpt">
+	  		<h2 id="aspnet-web-pages---添加razor代码">ASP.NET Web Pages - 添加Razor代码</h2>
+<p>ASP.NET Web Pages用Razor标记C#和VB代码</p>
+
+
+	  	</div>
+	  </li>
 	
-	    <li>11 Dec 2016 <a href="/2016/12/11/php_cookies.html">PHP 5 Cookies</a> <button class="btn">button</button></li>
+	  <li class="card"><a href="/2016/12/13/webpages_intro.html" class="title">Webpages Introduce</a>
+	  	<span class="tag asp">asp</span>
+	  	<span class="date">13 Dec 2016</span>
+	  	<div class="excerpt">
+	  		<h2 id="webpages-introduce">Webpages Introduce</h2>
+
+
+	  	</div>
+	  </li>
 	
-	    <li>09 Dec 2016 <a href="/2016/12/09/php_file.html">PHP 5 File Hangling</a> <button class="btn">button</button></li>
+	  <li class="card"><a href="/2016/12/13/asp_default.html" class="title">ASP和ASP.NET教程</a>
+	  	<span class="tag asp">asp</span>
+	  	<span class="date">13 Dec 2016</span>
+	  	<div class="excerpt">
+	  		<h2 id="asp和aspnet教程">ASP和ASP.NET教程</h2>
+<div class="text">
+    <ul>
+    	<li>ASP代表Active Server Pages</li>
+    	<li>ASP是制作web页面的开发框架</li>
+    	<li>ASP支持许多不同的开发模型：</li>
+    </ul>
+</div>
+<div class="text">
+	<ul>
+		<li>Classic ASP</li>
+		<li>ASP.NET Web Forms</li>
+		<li>ASP.NET MVC</li>
+		<li>ASP.NET Web Pages</li>
+		<li>ASP.NET API</li>
+		<li>ASP.NET Core</li>
+	</ul>
+</div>
+
+
+	  	</div>
+	  </li>
 	
-	    <li>26 Nov 2016 <a href="/2016/11/26/php_includes.html">PHP 5 Include Files</a> <button class="btn">button</button></li>
+	  <li class="card"><a href="/2016/12/11/php_session.html" class="title">PHP 5 Sessions</a>
+	  	<span class="tag php">php</span>
+	  	<span class="date">11 Dec 2016</span>
+	  	<div class="excerpt">
+	  		<h2 id="php-5-sessions">PHP 5 Sessions</h2>
+<p>session是一种用于跨多页面存储信息的方式。
+<br /><br />
+它不像cookie，信息没有存储在用户的电脑上。</p>
+
+
+	  	</div>
+	  </li>
 	
 </ul>
-      </section>
-    </div>
+<div id="paginator">
+	
+		
+			<a href="/index.html" class="pagination current-page">1</a>
+		
+	
+		
+	 		<a href=/pages/page2 class="pagination">2</a>
+	  
+	
+</div>
+        </section>
+      </div>
+    </main>
     <footer>
       <div class="container">
         <table>
@@ -55,6 +187,7 @@
           <td><a href="http://codepen.io/sunss0518/" class="btn" target="_blank">Codepen</a></td>
         </table>
       </div>
-    </footer>        
+    </footer>
+    <script type="text/javascript" src="/javascripts/tag.js"></script>   
   </body>
 </html>

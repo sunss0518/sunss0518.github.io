@@ -1,9 +1,9 @@
 ---
 layout: post
 title: ASP.NET Web Pages - 添加Razor代码
+tag: asp
 ---
 ## {{ page.title }}
-
 ASP.NET Web Pages用Razor标记C#和VB代码
 
 ### Razor标记

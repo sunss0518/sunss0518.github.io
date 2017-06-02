@@ -1,11 +1,11 @@
 ---
 layout: post
 title: PHP 5 Sessions
+tag: php
 ---
 ## {{ page.title }}
-
 session是一种用于跨多页面存储信息的方式。
-
+<br /><br />
 它不像cookie，信息没有存储在用户的电脑上。
 
 ### PHP Session是什么？

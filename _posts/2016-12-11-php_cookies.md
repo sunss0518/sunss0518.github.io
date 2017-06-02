@@ -1,9 +1,9 @@
 ---
 layout: post
 title: PHP 5 Cookies
+tag: php
 ---
 ## {{ page.title }}
-
 cookie通常被用来验证用户身份
 
 ### Cookie是什么？

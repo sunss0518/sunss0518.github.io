@@ -5,23 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/github-dark.css" media="screen">
+    <!-- <link rel="stylesheet" type="text/css" href="/stylesheets/github-dark.css" media="screen"> -->
     <title>ASP和ASP.NET教程</title>
   </head>
   <body>
     <header>
       <div class="container">
-        <h1>Sunss0518.GitHub.io</h1>
-        <h2></h2>
-        <section id="downloads">
-          <a href="https://github.com/sunss0518" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
+        <h1>的博客</h1>
+        <a href="https://github.com/sunss0518" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        <label id="toggle" for="nav-toggle" class="btn">三</label>
+        <input type="checkbox" id="nav-toggle" />
+        <nav>
+          <ul>
+            <li><a href="#" id="index">首页</a>
+            <li><a href="#1" id="css">CSS</a>
+            <li><a href="#2" id="js">JavaScript</a>
+            <li><a href="#3" id="threejs">ThreeJS</a>
+            <li><a href="#4" id="php">PHP</a>
+            <li><a href="#5" id="asp">ASP</a></li>
+          </ul>
+        </nav>
       </div>
     </header>
-    <div class="container">
-      <section id="main_content">
-        <h2 id="asp和aspnet教程">ASP和ASP.NET教程</h2>
-
+    <main>
+      <div class="container">
+        <section id="main_content">
+          <div id="post">
+            <h2 id="asp和aspnet教程">ASP和ASP.NET教程</h2>
 <div class="text">
     <ul>
     	<li>ASP代表Active Server Pages</li>
@@ -39,6 +49,7 @@
 		<li>ASP.NET Core</li>
 	</ul>
 </div>
+
 <h3 id="asp技术">ASP技术</h3>
 
 <p>ASP和ASP.NET是服务器端技术。</p>
@@ -95,27 +106,29 @@
 
 <p>ASP.NET Core将ASP.NET MVC，ASP.NET Web API和ASP.NET Web Pages合并到一个应用框架。</p>
 
-      </section>
-      <section id="main_comment">
-        <noscript>Please enable JavaScript to view the comment form powered by <a href="https://commentit.io/">Comm(ent|it)</a></noscript>
-        <div id="commentit"></div>
-        <script type="text/javascript">
-          /** CONFIGURATION VARIABLES **/
-          var commentitUsername = 'sunss0518';
-          var commentitRepo = 'sunss0518/sunss0518.github.io';
-          var commentitPath = '_posts/2016-12-13-asp_default.md';
-        
-          /** DON'T EDIT FOLLOWING LINES **/
-          (function() {
-              var commentit = document.createElement('script');
-              commentit.type = 'text/javascript';
-              commentit.async = true;
-              commentit.src = 'https://commentit.io/static/embed/dist/commentit.js';
-              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(commentit);
-          })();
-        </script>
+          </div>
+        </section>
+        <section id="main_comment">
+          <noscript>Please enable JavaScript to view the comment form powered by <a href="https://commentit.io/">Comm(ent|it)</a></noscript>
+          <div id="commentit"></div>
+          <script type="text/javascript">
+            /** CONFIGURATION VARIABLES **/
+            var commentitUsername = 'sunss0518';
+            var commentitRepo = 'sunss0518/sunss0518.github.io';
+            var commentitPath = '_posts/2016-12-13-asp_default.md';
+          
+            /** DON'T EDIT FOLLOWING LINES **/
+            (function() {
+                var commentit = document.createElement('script');
+                commentit.type = 'text/javascript';
+                commentit.async = true;
+                commentit.src = 'https://commentit.io/static/embed/dist/commentit.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(commentit);
+            })();
+          </script>
       </section>
     </div>
+    </main>
     <footer>
       <div class="container">
         <table>
@@ -124,6 +137,7 @@
           <td><a href="http://codepen.io/sunss0518/" class="btn" target="_blank">Codepen</a></td>
         </table>
       </div>
-    </footer>      
+    </footer>
+    <script type="text/javascript" src="/javascripts/tag.js"></script>   
   </body>
 </html>

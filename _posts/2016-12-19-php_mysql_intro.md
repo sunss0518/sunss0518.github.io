@@ -1,11 +1,11 @@
 ---
 layout: post
 title: PHP MySQL Database
+tag: php
 ---
 ## {{ page.title }}
-
 你可能需要用PHP连接和操作数据库。
-
+<br /><br />
 PHP最流行的数据库是MySQL。
 
 ### 什么是MySQL？
@@ -85,12 +85,12 @@ PDO工作在12种不同的数据库系统，MySQLi则只工作在MySQL数据库�
 对于Linux和Windows：在大多数情况下，当php5 mysql包安装时MySQLi扩展是自动安装的。
 
 安装细节，请转到：
-[http://php.net/manual/en/mysqli.installation.php](http://php.net/manual/en/mysqli.installation.php)
+[这里](http://php.net/manual/en/mysqli.installation.php)
 
 ### PDO安装
 
 安装细节，请转到：
-[http://php.net/manual/en/pdo.installation.php](http://php.net/manual/en/pdo.installation.php)
+[这里](http://php.net/manual/en/pdo.installation.php)
 
 ### 连接MySQL
 
@@ -285,7 +285,8 @@ $conn = null;
 
 CREATE TABLE语句用于在MySQL中创建一个表格。
 
-我们将创建一个叫做“MyGuests”的表格，它有五列：“id”，“firstname”，“lastname”，“email”，“reg_date”：
+我们将创建一个叫做“MyGuests”的表格，它有五列：“id”， “firstname”， “lastname”， “email”， “reg_date”：
+
 <div class="text">
 	CREATE TABLE MyGuests (
 	id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -432,7 +433,7 @@ INSERT INTO语句用来向表格中添加新的记录：
 INSERT INTO table_name (column1, column2, column3,...)
 VALUES (value1, value2, value3,...)
 ```
-在上一个章节，我们创建了一个叫做“MyGuests”的空表格，它包含5列：“id”，“firstname”，“lastname”，“email”和“reg_date”。现在，让我们把这个表格填满数据。
+在上一个章节，我们创建了一个叫做“MyGuests”的空表格，它包含5列：“id”， “firstname”， “lastname”， “email”和“reg_date”。现在，让我们把这个表格填满数据。
 <div class="text">
 	<strong>注意：</strong>如果一个列是AUTO_INCREMENT（像“id”列）或TIMESTAMP（像“reg_date”列），在SQL查询中它不需要指定；MySQL将自动添加它的值。
 </div>

@@ -5,26 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/github-dark.css" media="screen">
+    <!-- <link rel="stylesheet" type="text/css" href="/stylesheets/github-dark.css" media="screen"> -->
     <title>PHP MySQL Database</title>
   </head>
   <body>
     <header>
       <div class="container">
-        <h1>Sunss0518.GitHub.io</h1>
-        <h2></h2>
-        <section id="downloads">
-          <a href="https://github.com/sunss0518" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
+        <h1>的博客</h1>
+        <a href="https://github.com/sunss0518" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        <label id="toggle" for="nav-toggle" class="btn">三</label>
+        <input type="checkbox" id="nav-toggle" />
+        <nav>
+          <ul>
+            <li><a href="#" id="index">首页</a>
+            <li><a href="#1" id="css">CSS</a>
+            <li><a href="#2" id="js">JavaScript</a>
+            <li><a href="#3" id="threejs">ThreeJS</a>
+            <li><a href="#4" id="php">PHP</a>
+            <li><a href="#5" id="asp">ASP</a></li>
+          </ul>
+        </nav>
       </div>
     </header>
-    <div class="container">
-      <section id="main_content">
-        <h2 id="php-mysql-database">PHP MySQL Database</h2>
-
-<p>你可能需要用PHP连接和操作数据库。</p>
-
-<p>PHP最流行的数据库是MySQL。</p>
+    <main>
+      <div class="container">
+        <section id="main_content">
+          <div id="post">
+            <h2 id="php-mysql-database">PHP MySQL Database</h2>
+<p>你可能需要用PHP连接和操作数据库。
+<br /><br />
+PHP最流行的数据库是MySQL。</p>
 
 <h3 id="什么是mysql">什么是MySQL？</h3>
 
@@ -113,12 +123,12 @@
 <p>对于Linux和Windows：在大多数情况下，当php5 mysql包安装时MySQLi扩展是自动安装的。</p>
 
 <p>安装细节，请转到：
-<a href="http://php.net/manual/en/mysqli.installation.php">http://php.net/manual/en/mysqli.installation.php</a></p>
+<a href="http://php.net/manual/en/mysqli.installation.php">这里</a></p>
 
 <h3 id="pdo安装">PDO安装</h3>
 
 <p>安装细节，请转到：
-<a href="http://php.net/manual/en/pdo.installation.php">http://php.net/manual/en/pdo.installation.php</a></p>
+<a href="http://php.net/manual/en/pdo.installation.php">这里</a></p>
 
 <h3 id="连接mysql">连接MySQL</h3>
 
@@ -313,7 +323,8 @@ $conn = null;
 
 <p>CREATE TABLE语句用于在MySQL中创建一个表格。</p>
 
-<p>我们将创建一个叫做“MyGuests”的表格，它有五列：“id”，“firstname”，“lastname”，“email”，“reg_date”：</p>
+<p>我们将创建一个叫做“MyGuests”的表格，它有五列：“id”， “firstname”， “lastname”， “email”， “reg_date”：</p>
+
 <div class="text">
 	CREATE TABLE MyGuests (
 	id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -464,7 +475,7 @@ $conn = null;
 VALUES (value1, value2, value3,...)
 </code></pre>
 </div>
-<p>在上一个章节，我们创建了一个叫做“MyGuests”的空表格，它包含5列：“id”，“firstname”，“lastname”，“email”和“reg_date”。现在，让我们把这个表格填满数据。</p>
+<p>在上一个章节，我们创建了一个叫做“MyGuests”的空表格，它包含5列：“id”， “firstname”， “lastname”， “email”和“reg_date”。现在，让我们把这个表格填满数据。</p>
 <div class="text">
 	<strong>注意：</strong>如果一个列是AUTO_INCREMENT（像“id”列）或TIMESTAMP（像“reg_date”列），在SQL查询中它不需要指定；MySQL将自动添加它的值。
 </div>
@@ -771,27 +782,29 @@ $conn = null;
 </code></pre>
 </div>
 
-      </section>
-      <section id="main_comment">
-        <noscript>Please enable JavaScript to view the comment form powered by <a href="https://commentit.io/">Comm(ent|it)</a></noscript>
-        <div id="commentit"></div>
-        <script type="text/javascript">
-          /** CONFIGURATION VARIABLES **/
-          var commentitUsername = 'sunss0518';
-          var commentitRepo = 'sunss0518/sunss0518.github.io';
-          var commentitPath = '_posts/2016-12-19-php_mysql_intro.md';
-        
-          /** DON'T EDIT FOLLOWING LINES **/
-          (function() {
-              var commentit = document.createElement('script');
-              commentit.type = 'text/javascript';
-              commentit.async = true;
-              commentit.src = 'https://commentit.io/static/embed/dist/commentit.js';
-              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(commentit);
-          })();
-        </script>
+          </div>
+        </section>
+        <section id="main_comment">
+          <noscript>Please enable JavaScript to view the comment form powered by <a href="https://commentit.io/">Comm(ent|it)</a></noscript>
+          <div id="commentit"></div>
+          <script type="text/javascript">
+            /** CONFIGURATION VARIABLES **/
+            var commentitUsername = 'sunss0518';
+            var commentitRepo = 'sunss0518/sunss0518.github.io';
+            var commentitPath = '_posts/2016-12-19-php_mysql_intro.md';
+          
+            /** DON'T EDIT FOLLOWING LINES **/
+            (function() {
+                var commentit = document.createElement('script');
+                commentit.type = 'text/javascript';
+                commentit.async = true;
+                commentit.src = 'https://commentit.io/static/embed/dist/commentit.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(commentit);
+            })();
+          </script>
       </section>
     </div>
+    </main>
     <footer>
       <div class="container">
         <table>
@@ -800,6 +813,7 @@ $conn = null;
           <td><a href="http://codepen.io/sunss0518/" class="btn" target="_blank">Codepen</a></td>
         </table>
       </div>
-    </footer>      
+    </footer>
+    <script type="text/javascript" src="/javascripts/tag.js"></script>   
   </body>
 </html>

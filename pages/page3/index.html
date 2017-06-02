@@ -1,0 +1,36 @@
+---
+layout: default
+title: Sun's Blog
+---
+<ul>
+	{% for post in site.posts %}
+	  {% assign length = forloop.length %}
+	  {% assign pages = length | divided_by:10 | plus:1 %}
+	{% endfor %}
+	{% assign urlarr = page.url | split:"" %}
+	{% assign n = urlarr[-2] %}
+	{% assign o = n | minus:1 | times:10 %}
+	{% for post in site.posts limit:10 offset:o %}
+	  <li class="card"><a href="{{ post.url }}" class="title">{{ post.title }}</a>
+	  	<span class="tag {{ post.tag }}">{{ post.tag }}</span>
+	  	<span class="date">{{ post.date | date_to_string }}</span>
+	  	<div class="excerpt">
+	  		{{ post.excerpt }}
+	  	</div>
+	  </li>
+	{% endfor %}
+</ul>
+<div id="paginator">
+	{% for p in (1..pages) %}
+		{% if p == 1 %}
+			<a href="/index.html" class="pagination">{{ p }}</a>
+		{% else %}
+			{% assign pa = p | split:"" %}
+			{% if pa contains n %}
+				<a href={{ "/pages/page" | append:p }} class="pagination current-page">{{ p }}</a>
+	  	{% else %}
+	  		<a href={{ "/pages/page" | append:p }} class="pagination">{{ p }}</a>
+	  	{% endif %}
+	  {% endif %}
+	{% endfor %}
+</div>

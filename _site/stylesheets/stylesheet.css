@@ -1,16 +1,20 @@
 body {
   margin: 0;
   padding: 0;
-  background: #151515 url("../images/bkg.png") 0 0;
-  color: #eaeaea;
-  font: 16px;
+  background: url("../images/Ivo.png") repeat fixed 0 0;
+  background-size: 100% auto;
+  color: #000;
+  font-size: 16px;
   line-height: 1.5;
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 
 /* General & 'Reset' Stuff */
 
 .container {
+  position: relative;
   width: 90%;
   max-width: 600px;
   margin: 0 auto;
@@ -25,8 +29,17 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 0 20px;
 }
 
+ul {
+  padding: 0;
+}
+
 li {
   line-height: 1.4 ;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
 }
 
 /* Header, <header>
@@ -36,20 +49,49 @@ li {
 */
 
 header {
-  background: rgba(0, 0, 0, 0.1);
-  width: 100%;
-  border-bottom: 1px dashed #b5e853;
+  position: relative;
+  background: rgba(255, 255, 255, .9);
+  width: 90%;
+  max-width: 600px;
   padding: 20px 0;
-  margin: 0 0 40px 0;
+  margin: 0 auto 40px auto;
+}
+header:after {
+  content: "";
+  position: absolute;
+  top: -60px;
+  height: 60px;
+  width: 100%;
+  border-top: 2px solid rgba(0, 255, 0, .5);
+  border-bottom: none;
+  box-sizing: border-box;
+  transition: top 1s linear;
+  background: linear-gradient(
+              to bottom, 
+              rgba(0, 255, 0, .4), 
+              rgba(0, 255, 0, .3), 
+              rgba(0, 255, 0, .2), 
+              rgba(0, 255, 0, .1));
+}
+header:hover:after {
+  top: 100%;
+  border-bottom: 2px solid rgba(0, 255, 0, .5);
+  border-top: none;
+  background: linear-gradient(
+              to top, 
+              rgba(0, 255, 0, .3), 
+              rgba(0, 255, 0, .2), 
+              rgba(0, 255, 0, .1), 
+              rgba(0, 255, 0, .1));
 }
 
 header h1 {
   font-size: 30px;
   line-height: 1.5;
-  margin: 0 0 0 -40px;
+  margin: 0;
   font-weight: bold;
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
-  color: #b5e853;
+  color: #366112;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1),
                0 0 5px rgba(181, 232, 83, 0.1),
                0 0 10px rgba(181, 232, 83, 0.1);
@@ -58,8 +100,8 @@ header h1 {
 }
 
 header h1:before {
-  content: "./ ";
-  font-size: 24px;
+  content: url("../images/logo.png");
+  margin-right: 10px;
 }
 
 header h2 {
@@ -68,27 +110,117 @@ header h2 {
   color: #666;
 }
 
-#downloads .btn {
-  display: inline-block;
-  text-align: center;
-  margin: 0;
+/*toggle*/
+#toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
+input[id="nav-toggle"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+input[id="nav-toggle"]:checked + nav {
+  display: block;
+}
+
+/*nav*/
+nav {
+  display: none;
+  width: 100%;
+}
+nav ul {
+  padding: 0;
+}
+nav ul li {
+  line-height: 40px;
+  text-align: center;
+}
+nav ul li a {
+  display: inline-block;
+  width: 100%;
+  padding: 0 30px;
+  line-height: 40px;
+  box-sizing: border-box;
+  color: #366112;
+  font-size: 20px;
+  transform: scale(0.7);
+  transition: all 0.3s linear;
+}
+
+@media only screen and (max-width: 600px) {
+  nav ul li {
+    /*background-color: rgba(0, 0, 0, .2);*/
+  }
+  nav ul li + li {
+    border-top: 1px solid rgba(255, 255, 255, 1);
+  }
+  nav:hover ul li a {
+    text-shadow: 0 0 15px #366112;
+  }
+  nav ul li a:hover {
+    text-shadow: 0 0 1px #366112;
+    transform: scale(1.2);
+  }
+  .date {
+    bottom: 10px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  #toggle {
+    display: none;
+  }
+  header .btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  nav {
+    display: block;
+  }
+  nav ul li {
+    display: inline-block;
+  }
+  nav:hover ul li a {
+    text-shadow: 0 0 15px #366112;
+  }
+  nav ul li a:hover {
+    text-shadow: 0 0 1px #366112;
+    transform: scale(1.2);
+  }
+}
+
 
 /* Main Content
 */
+
+main {
+  width: 100%;
+}
 
 #main_content {
   min-height: 600px;
   width: 100%;
   -webkit-font-smoothing: antialiased;
 }
-#main_comment {
+#post {
+  padding: 20px;
+  background-color: rgba(255, 255, 255, .9);
+}
+#post p, #post ul {
+  text-indent: 32px;
+}
+/*#main_comment {
   margin-top: 50px;
   padding: 10px;
   width: 100%;
   -webkit-font-smoothing: antialiased;
-  /*background-color: rgba(255, 0, 0, .5);*/
-}
+  box-sizing: border-box;
+  background-color: rgba(255, 0, 0, .5);
+}*/
 section img {
   max-width: 100%
 }
@@ -96,7 +228,7 @@ section img {
 h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
-  color: #b5e853;
+  color: #366112;
   letter-spacing: -0.03em;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1),
                0 0 5px rgba(181, 232, 83, 0.1),
@@ -132,22 +264,83 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 0 5px 0;
 }
 
+/* card */
+.card {
+  position: relative;
+  margin-top: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 0 15px #000;
+  background-color: rgba(255, 255, 255, .9);
+  transition: transform .6s linear;
+}
+.card:hover {
+  transform: scaleY(1.1);
+  background-color: #fff;
+  z-index: 3;
+}
+.card:before {
+  content: "";
+  margin: 0;
+}
+.title {
+  padding: 3px 3px;
+  color: #751948;
+  border-bottom: 2px solid #000;
+  transition: all .3s linear;
+}
+.title:hover {
+  padding: 8px 3px;
+  box-shadow: 0 0 15px #000;
+}
+.tag {
+  display: inline-block;
+  padding: 0 8px;
+  font-size: 10px;
+  color: #fff;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+.tag.css {
+  background-color: #471247;
+}
+.tag.js {
+  background-color: #860924;
+}
+.tag.threejs {
+  background-color: #580184;
+}
+.tag.php {
+  background-color: #224310;
+}
+.tag.asp {
+  background-color: #d52910;
+}
+.date {
+  position: absolute;
+  right: 21px;
+  font-style: italic;
+}
+.excerpt {
+  margin-top: 15px;
+}
+
 dt {
   font-style: italic;
   font-weight: bold;
 }
 
-ul li {
+main ul li {
   margin-bottom: 0px;
   list-style: none;
 }
 
-ul li:before {
+main ul li:before {
   content: ">>";
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
   font-size: 13px;
-  color: #b5e853;
-  margin-left: -37px;
+  color: #366112;
+  margin-left: -30px;
   margin-right: 21px;
   line-height: 16px;
 }
@@ -163,13 +356,13 @@ pre {
   border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 10px;
   font-size: 14px;
-  color: #b5e853;
+  color: #36f112;
   border-radius: 2px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
-  text-wrap: normal;
+  /*text-wrap: normal;*/
   overflow: auto;
-  overflow-y: hidden;
+  /*overflow-y: hidden;*/
 }
 
 table {
@@ -234,16 +427,33 @@ table tr.color2 {
 hr {
   height: 0;
   border: 0;
-  border-bottom: 1px dashed #b5e853;
-  color: #b5e853;
+  border-bottom: 1px dashed #366112;
+  color: #366112;
 }
 
 .text {
-  width: 100%;
+  width: 90%;
   margin: 20px 0;
   padding: 8px;
-  border-left: 6px solid #b5e853;
+  border-left: 6px solid #366112;
   background-color: rgba(150, 150, 100, .3);
+}
+
+/* paginator */
+#paginator {
+  width: 100%;
+  text-align: center;
+  color: #000;
+}
+.pagination {
+  display: inline-block;
+  width: 20px;
+  background: rgba(255, 255, 255, .8);
+}
+.current-page {
+  background: rgba(255, 255, 255, .8);
+  transform: scale(1.2);
+  box-shadow: inset 2px 2px 5px #000, inset -2px -2px 5px #000;
 }
 
 /* Footer */
@@ -251,8 +461,7 @@ footer {
   margin-top: 50px;
   height: 50px;
   width: 100%;
-  background: rgba(0, 0, 0, 0.1);
-  border-top: 1px dashed #b5e853;
+  background: rgba(255, 255, 255, .9);
   padding: 20px 0;
 }
 
@@ -267,7 +476,7 @@ footer {
   border: 2px solid rgba(0, 0, 0, 0.7);
   border-bottom: 2px solid rgba(0, 0, 0, 0.7);
   border-top: 2px solid rgba(0, 0, 0, 1);
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
   font-family: Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-size: 13px;
@@ -297,10 +506,10 @@ footer {
    a, a:hover, a:visited
 */
 
-a {
+/*a {
   color: #63c0f5;
   text-shadow: 0 0 5px rgba(104, 182, 255, 0.5);
-}
+}*/
 
 /* Clearfix */
 

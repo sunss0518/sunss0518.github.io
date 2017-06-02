@@ -1,11 +1,11 @@
 ---
 layout: post
 title: PHP 5 Include Files
+tag: php
 ---
 ## {{ page.title }}
-
 include语句把指定文件里面所有存在的文本/代码/标记复制进文件里。
-
+<br /><br />
 当你想在一个网站的多个页面包含相同的PHP、HTML或者文本时，包含文件是非常有用的。
 
 ### PHP的include语句和require语句

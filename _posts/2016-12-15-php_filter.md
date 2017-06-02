@@ -1,11 +1,11 @@
 ---
 layout: post
 title: PHP Filters
+tag: php
 ---
 ## {{ page.title }}
-
 Validating data = 确定数据是否处于适当的形式
-
+<br /><br />
 Sanitizing data = 移除数据中所有非法的字符
 
 ### The PHP Filter扩展
